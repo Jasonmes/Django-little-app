@@ -14,8 +14,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('polls/', include('polls.urls'))  # 添加的视图函数URLconfs
 ]
+
+"""
+函数 include() 允许引用其它 URLconfs。
+每当 Django 遇到 :
+           func：~django.urls.include 时，
+    它会截断与此项匹配的 URL 的部分，并将剩余的字符串发送到 URLconf 
+    以供进一步处理
+何时使用 include()：
+           当包括其它 URL 模式时你应该总是使用 include() ， 
+           admin.site.urls 是唯一例外
+"""
+
+"""
+5.验证是否正常工作，运行下面的命令:
+$ python3 manage.py runserver
+----> 如果端口被占用   那么就自己修改或者设置
+$ python3 manage.py runserver 8080
+"""
+
+"""
+6.
+用你的浏览器访问 http://localhost:8080/polls/
+"""
